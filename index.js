@@ -8,18 +8,22 @@ app.set("view engine","ejs");
 
 const comments = [
     {
+        id: 1,
         username: "Vijeet",
         comment: "I am shifting to UP"
     },
     {
+        id:2,
         username: "Yash",
         comment: "Tommorow I'll come on my activa"
     },
     {
+        id: 3,
         username: "Kartik",
         comment: "It's so far away"
     },
     {
+        id: 4,
         username: "Parth",
         comment: "I'll come maybe, I'm not sure"
     }
@@ -39,6 +43,13 @@ app.post("/comments",(req,res) =>{
     comments.push({username,comment});
     res.redirect("/comments");
 });
+
+app.get("/comments/:id",(req,res) =>{
+    const {id} = req.params;
+    const comment = comments.find(c => c.id === parseInt(id));
+    res.render("comments/show",{comment});
+
+})
 
 
 
